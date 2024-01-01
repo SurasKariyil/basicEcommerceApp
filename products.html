@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SK Store</title>
-    <link rel="icon" href="images/main.jpg" />
+    <link rel="icon"  href="images/main.jpg" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   </head>
   <body>
@@ -59,13 +59,8 @@
           <Label><i>Low to High</i></Label>
           <input type="radio" name="price"><br>
           <Label><i>High to Low</i></Label>
-          <input type="radio" name="price"><br><br>
-          <label ><i>Ratings</i></label><br><br>
-          <Label><i>Low to High</i></Label>
-          <input type="radio" name="Rating"><br>
-          <Label><i>High to Low</i></Label>
-          <input type="radio" name="Rating"><br><br>
-          <button class="btn btn-success">Apply</button>
+          <input type="radio" name="price" ><br><br>
+          <button class="btn btn-success"  >Apply</button>
 
         </div>
     <div class="col row" id="cardSpace" >
@@ -84,9 +79,21 @@
           </div>
         </div>`
       }
+     
       async function productDatas() {
         const productsList = await fetch('https://fakestoreapi.com/products');
         const products = await productsList.json();
+        const length = products.length;
+        let p1=0;
+        for(let i=0;i<length;i++){
+          for(let j=0;j<length;j++){
+              if(products[i].price<products[j].price){
+              p1=products[i];
+              products[i]=products[j];
+              products[j]=p1;
+         }
+        }
+      }
         let list = '';
         for(let pr of products){
           const li = cardStoring(pr);
